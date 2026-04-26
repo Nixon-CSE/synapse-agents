@@ -1,0 +1,9 @@
+{
+  "PrivateKeyPath": "private-aiden.pem",
+  "Peers": [
+    "tls://34.46.48.224:9001",
+    "tls://136.111.135.206:9001"
+  ],
+  "ApiPort": 9012,
+  "TCPPort": 7012
+}

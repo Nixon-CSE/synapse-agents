@@ -1,0 +1,9 @@
+{
+  "PrivateKeyPath": "private-aria.pem",
+  "Peers": [
+    "tls://34.46.48.224:9001",
+    "tls://136.111.135.206:9001"
+  ],
+  "ApiPort": 9010,
+  "TCPPort": 7010
+}
