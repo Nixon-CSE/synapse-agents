@@ -4,7 +4,8 @@ async function main() {
     console.log("🚀 Deploying SYNAPSE contracts...");
     console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
 
-    const [deployer] = await hre.ethers.getSigners();
+    const signers = await hre.ethers.getSigners();
+    const deployer = signers[0];
     console.log("📍 Deployer address:", deployer.address);
 
     const balance = await hre.ethers.provider.getBalance(deployer.address);
