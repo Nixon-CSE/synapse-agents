@@ -1,0 +1,277 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=IBM+Plex+Mono:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #F5F0E8;
+  --black: #0A0A0A;
+  --white: #FFFFFF;
+  --aria-green: #00FF88;
+  --apex-orange: #FF4500;
+  --aiden-blue: #0066FF;
+  --shadow-sm: 3px 3px 0px #0A0A0A;
+  --shadow-md: 4px 4px 0px #0A0A0A;
+  --shadow-lg: 6px 6px 0px #0A0A0A;
+  --border: 3px solid #0A0A0A;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: var(--bg);
+  color: var(--black);
+  font-family: 'Space Mono', 'IBM Plex Mono', monospace;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: var(--bg);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+  border-left: 2px solid var(--black);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--black);
+}
+
+/* Brutalist card base */
+.card {
+  border: var(--border);
+  box-shadow: var(--shadow-md);
+  background: var(--white);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+.card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Button base */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border: var(--border);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  padding: 0.5rem 1.2rem;
+  transition: transform 0.1s, box-shadow 0.1s;
+  border-radius: 0;
+  text-decoration: none;
+  color: var(--black);
+}
+
+.btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn:active {
+  transform: translate(0px, 0px);
+  box-shadow: none;
+}
+
+.btn-green {
+  background: var(--aria-green);
+}
+.btn-orange {
+  background: var(--apex-orange);
+  color: var(--white);
+}
+.btn-blue {
+  background: var(--aiden-blue);
+  color: var(--white);
+}
+.btn-black {
+  background: var(--black);
+  color: var(--white);
+}
+.btn-white {
+  background: var(--white);
+}
+
+/* Section headers */
+.section-header {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-bottom: var(--border);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Table styles */
+.brutalist-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.75rem;
+}
+
+.brutalist-table th,
+.brutalist-table td {
+  border: 2px solid var(--black);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+.brutalist-table th {
+  background: var(--black);
+  color: var(--white);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.brutalist-table tr:nth-child(even) td {
+  background: #f0ebe0;
+}
+
+/* Progress bar */
+.progress-track {
+  height: 16px;
+  background: var(--bg);
+  border: 2px solid var(--black);
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Pulse animations */
+@keyframes pulse-green {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.6); }
+  50% { box-shadow: 0 0 0 8px rgba(0, 255, 136, 0); }
+}
+
+@keyframes pulse-orange {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 69, 0, 0.6); }
+  50% { box-shadow: 0 0 0 8px rgba(255, 69, 0, 0); }
+}
+
+@keyframes pulse-blue {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 102, 255, 0.6); }
+  50% { box-shadow: 0 0 0 8px rgba(0, 102, 255, 0); }
+}
+
+.pulse-green { animation: pulse-green 1.5s infinite; }
+.pulse-orange { animation: pulse-orange 1.5s infinite; }
+.pulse-blue { animation: pulse-blue 1.8s infinite; }
+
+/* Terminal */
+.terminal {
+  background: #0A0A0A;
+  color: #00FF88;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  line-height: 1.6;
+  padding: 1rem;
+  overflow-y: auto;
+  border: var(--border);
+}
+
+@keyframes fadeInLine {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.terminal-line {
+  animation: fadeInLine 0.3s ease forwards;
+}
+
+/* Network lines */
+@keyframes dashMove {
+  from { stroke-dashoffset: 100; }
+  to { stroke-dashoffset: 0; }
+}
+
+/* Notification slide */
+@keyframes slideInRight {
+  from { transform: translateX(120%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideOutRight {
+  from { transform: translateX(0); opacity: 1; }
+  to { transform: translateX(120%); opacity: 0; }
+}
+
+.notif-enter {
+  animation: slideInRight 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.notif-exit {
+  animation: slideOutRight 0.3s ease forwards;
+}
+
+/* Grid overlay effect */
+.grid-bg {
+  background-image: 
+    linear-gradient(to right, rgba(10,10,10,0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(10,10,10,0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Nav */
+.nav-link {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--black);
+  text-decoration: none;
+  padding: 0.4rem 0.8rem;
+  border: 2px solid transparent;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  border-color: var(--black);
+  background: var(--black);
+  color: var(--white);
+}
+
+/* Counter blink */
+@keyframes counterBlip {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+.counter-active {
+  animation: counterBlip 0.3s ease;
+}
