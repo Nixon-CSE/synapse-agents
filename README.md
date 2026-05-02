@@ -52,3 +52,7 @@ KeeperHub solves a real problem for autonomous
 agents. The execution reliability layer is exactly
 what APEX needed. Main gap is Python support and
 testnet sandbox for hackathon builders.
+
+## Architecture Diagram
+
+![SYNAPSE Architecture](./docs/images/architecture.svg)

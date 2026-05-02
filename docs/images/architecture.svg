@@ -1,0 +1,182 @@
+<svg width="900" height="600" viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg" font-family="monospace">
+
+  <!-- Background -->
+  <rect width="900" height="600" fill="#0a0a1a"/>
+
+  <!-- Title -->
+  <text x="450" y="35" text-anchor="middle"
+    font-size="18" font-weight="bold"
+    fill="#00FF88" letter-spacing="4">
+    SYNAPSE — SYSTEM ARCHITECTURE
+  </text>
+
+  <!-- ── LAYER 0: AGENTS ── -->
+  <text x="30" y="70" font-size="10" fill="#444" letter-spacing="2">AGENTS</text>
+
+  <!-- ARIA -->
+  <rect x="30" y="78" width="200" height="60"
+    rx="4" fill="#001a0d" stroke="#00FF88" stroke-width="1.5"/>
+  <text x="130" y="103" text-anchor="middle"
+    font-size="13" font-weight="bold" fill="#00FF88">ARIA</text>
+  <text x="130" y="120" text-anchor="middle"
+    font-size="9" fill="#006633">ANALYST · aria.syn.eth · #1</text>
+
+  <!-- APEX -->
+  <rect x="350" y="78" width="200" height="60"
+    rx="4" fill="#1a0500" stroke="#FF4500" stroke-width="1.5"/>
+  <text x="450" y="103" text-anchor="middle"
+    font-size="13" font-weight="bold" fill="#FF4500">APEX</text>
+  <text x="450" y="120" text-anchor="middle"
+    font-size="9" fill="#993300">EXECUTOR · apex.syn.eth · #2</text>
+
+  <!-- AIDEN -->
+  <rect x="670" y="78" width="200" height="60"
+    rx="4" fill="#00050f" stroke="#0066FF" stroke-width="1.5"/>
+  <text x="770" y="103" text-anchor="middle"
+    font-size="13" font-weight="bold" fill="#0066FF">AIDEN</text>
+  <text x="770" y="120" text-anchor="middle"
+    font-size="9" fill="#003399">AUDITOR · aiden.syn.eth · #3</text>
+
+  <!-- Arrows: Agents → AXL -->
+  <line x1="130" y1="138" x2="130" y2="168"
+    stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="450" y1="138" x2="450" y2="168"
+    stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+  <line x1="770" y1="138" x2="770" y2="168"
+    stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ── LAYER 1: GENSYN AXL ── -->
+  <rect x="20" y="170" width="860" height="110"
+    rx="6" fill="#000814" stroke="#0044CC" stroke-width="1.5"/>
+  <text x="450" y="198" text-anchor="middle"
+    font-size="13" font-weight="bold" fill="#4488FF"
+    letter-spacing="2">
+    GENSYN AXL — NERVOUS SYSTEM
+  </text>
+
+  <!-- AXL boxes -->
+  <rect x="50" y="208" width="180" height="36"
+    rx="3" fill="#000d26" stroke="#0044CC" stroke-width="1"/>
+  <text x="140" y="230" text-anchor="middle"
+    font-size="9" fill="#4488FF">E2E Encrypted P2P Mesh</text>
+
+  <rect x="270" y="208" width="180" height="36"
+    rx="3" fill="#000d26" stroke="#0044CC" stroke-width="1"/>
+  <text x="360" y="230" text-anchor="middle"
+    font-size="9" fill="#4488FF">Zero Central Broker</text>
+
+  <rect x="490" y="208" width="180" height="36"
+    rx="3" fill="#000d26" stroke="#0044CC" stroke-width="1"/>
+  <text x="580" y="230" text-anchor="middle"
+    font-size="9" fill="#4488FF">Auto Peer Discovery</text>
+
+  <rect x="710" y="208" width="150" height="36"
+    rx="3" fill="#000d26" stroke="#0044CC" stroke-width="1"/>
+  <text x="785" y="230" text-anchor="middle"
+    font-size="9" fill="#4488FF">MCP + A2A Native</text>
+
+  <!-- Arrow: AXL → 0G -->
+  <line x1="450" y1="280" x2="450" y2="310"
+    stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ── LAYER 2: 0G LABS ── -->
+  <rect x="20" y="312" width="860" height="130"
+    rx="6" fill="#001a00" stroke="#00AA44" stroke-width="1.5"/>
+  <text x="450" y="338" text-anchor="middle"
+    font-size="13" font-weight="bold" fill="#00FF88"
+    letter-spacing="2">
+    0G LABS — BRAIN
+  </text>
+
+  <!-- 0G sub boxes -->
+  <rect x="40" y="348" width="170" height="50"
+    rx="3" fill="#002200" stroke="#00AA44" stroke-width="1"/>
+  <text x="125" y="368" text-anchor="middle"
+    font-size="9" font-weight="bold" fill="#00FF88">0G Storage KV</text>
+  <text x="125" y="384" text-anchor="middle"
+    font-size="8" fill="#006622">Live agent state</text>
+
+  <rect x="228" y="348" width="170" height="50"
+    rx="3" fill="#002200" stroke="#00AA44" stroke-width="1"/>
+  <text x="313" y="368" text-anchor="middle"
+    font-size="9" font-weight="bold" fill="#00FF88">0G Storage Log</text>
+  <text x="313" y="384" text-anchor="middle"
+    font-size="8" fill="#006622">Audit history</text>
+
+  <rect x="416" y="348" width="170" height="50"
+    rx="3" fill="#002200" stroke="#00AA44" stroke-width="1"/>
+  <text x="501" y="368" text-anchor="middle"
+    font-size="9" font-weight="bold" fill="#00FF88">0G Compute</text>
+  <text x="501" y="384" text-anchor="middle"
+    font-size="8" fill="#006622">qwen3-6plus inference</text>
+
+  <rect x="604" y="348" width="170" height="50"
+    rx="3" fill="#002200" stroke="#00AA44" stroke-width="1"/>
+  <text x="689" y="368" text-anchor="middle"
+    font-size="9" font-weight="bold" fill="#00FF88">iNFT ERC-7857</text>
+  <text x="689" y="384" text-anchor="middle"
+    font-size="8" fill="#006622">Agent ownership</text>
+
+  <!-- Arrow: 0G → KeeperHub -->
+  <line x1="450" y1="442" x2="450" y2="468"
+    stroke="#333" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- ── LAYER 3: KEEPERHUB ── -->
+  <rect x="20" y="470" width="860" height="110"
+    rx="6" fill="#1a0800" stroke="#FF6600" stroke-width="1.5"/>
+  <text x="450" y="496" text-anchor="middle"
+    font-size="13" font-weight="bold" fill="#FF8800"
+    letter-spacing="2">
+    KEEPERHUB — MUSCLE
+  </text>
+
+  <!-- KeeperHub boxes -->
+  <rect x="40" y="506" width="160" height="36"
+    rx="3" fill="#2a0d00" stroke="#FF6600" stroke-width="1"/>
+  <text x="120" y="528" text-anchor="middle"
+    font-size="9" fill="#FF8800">Guaranteed Execution</text>
+
+  <rect x="220" y="506" width="150" height="36"
+    rx="3" fill="#2a0d00" stroke="#FF6600" stroke-width="1"/>
+  <text x="295" y="528" text-anchor="middle"
+    font-size="9" fill="#FF8800">Auto Retry (5×)</text>
+
+  <rect x="390" y="506" width="150" height="36"
+    rx="3" fill="#2a0d00" stroke="#FF6600" stroke-width="1"/>
+  <text x="465" y="528" text-anchor="middle"
+    font-size="9" fill="#FF8800">Gas Optimization</text>
+
+  <rect x="560" y="506" width="150" height="36"
+    rx="3" fill="#2a0d00" stroke="#FF6600" stroke-width="1"/>
+  <text x="635" y="528" text-anchor="middle"
+    font-size="9" fill="#FF8800">x402 Payments</text>
+
+  <rect x="730" y="506" width="130" height="36"
+    rx="3" fill="#2a0d00" stroke="#FF6600" stroke-width="1"/>
+  <text x="795" y="528" text-anchor="middle"
+    font-size="9" fill="#FF8800">MCP Server</text>
+
+  <!-- Contract addresses footer -->
+  <text x="450" y="572" text-anchor="middle"
+    font-size="8" fill="#333">
+    SynapseNFT: 0x435aecBd6Bf3bD6a6F270Ec8C32847b83edf5087
+  </text>
+  <text x="450" y="588" text-anchor="middle"
+    font-size="8" fill="#333">
+    AgentRegistry: 0x48A75514c9dE15234De96B4e08101607a67eC7E8 · 0G Galileo Testnet
+  </text>
+
+  <!-- Arrow marker -->
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10"
+      refX="8" refY="5"
+      markerWidth="6" markerHeight="6"
+      orient="auto-start-reverse">
+      <path d="M2 1L8 5L2 9"
+        fill="none" stroke="#444"
+        stroke-width="1.5"
+        stroke-linecap="round"/>
+    </marker>
+  </defs>
+
+</svg>
