@@ -56,3 +56,10 @@ testnet sandbox for hackathon builders.
 ## Architecture Diagram
 
 ![SYNAPSE Architecture](./docs/images/architecture.svg)
+
+## Deployed Contracts
+
+| Contract | Address | Explorer |
+|---|---|---|
+| SynapseNFT | 0x435aecBd6Bf3bD6a6F270Ec8C32847b83edf5087 | [View](https://chainscan-galileo.0g.ai/address/0x435aecBd6Bf3bD6a6F270Ec8C32847b83edf5087) |
+| AgentRegistry | 0x48A75514c9dE15234De96B4e08101607a67eC7E8 | [View](https://chainscan-galileo.0g.ai/address/0x48A75514c9dE15234De96B4e08101607a67eC7E8) |
