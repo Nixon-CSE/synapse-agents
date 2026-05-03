@@ -3,12 +3,20 @@
 import { useEffect, useRef, useState } from 'react';
 import { TerminalMessage, TERMINAL_MESSAGES } from '@/lib/data';
 
+interface LiveLog {
+  time: string;
+  from: string;
+  event: string;
+  data: string;
+}
+
 interface Props {
   height?: number;
   title?: string;
+  liveLogs?: LiveLog[];
 }
 
-export default function Terminal({ height = 320, title = 'AXL P2P MESH — MESSAGE TERMINAL' }: Props) {
+export default function Terminal({ height = 320, title = 'AXL P2P MESH — MESSAGE TERMINAL', liveLogs = [] }: Props) {
   const [lines, setLines] = useState<TerminalMessage[]>([]);
   const [visible, setVisible] = useState<number[]>([]);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -98,6 +106,22 @@ export default function Terminal({ height = 320, title = 'AXL P2P MESH — MESSA
         <div style={{ color: '#444', marginBottom: '1rem', fontSize: '0.65rem' }}>
           {'> TYPE `help` FOR COMMANDS · SHOWING LIVE MESSAGE FEED'}
         </div>
+        {/* Live API log entries (shown first if available) */}
+        {liveLogs.map((log, i) => (
+          <div
+            key={`live-${i}`}
+            className="terminal-line"
+            style={{ marginBottom: '0.25rem', display: 'flex', gap: 8, flexWrap: 'wrap' }}
+          >
+            <span style={{ color: '#444', minWidth: 60 }}>{log.time}</span>
+            <span style={{ color: '#00FF88', fontWeight: 700, minWidth: 50 }}>[{log.from}]</span>
+            <span style={{ color: '#555', minWidth: 70 }}>{log.event}:</span>
+            <span style={{ color: '#CCCCCC', flex: 1 }}>{log.data}</span>
+          </div>
+        ))}
+        {liveLogs.length > 0 && (
+          <div style={{ color: '#333', fontSize: '0.6rem', marginBottom: '0.5rem', borderBottom: '1px solid #1a1a1a', paddingBottom: 4 }}>── hardcoded feed below ──</div>
+        )}
         {lines.map(line => (
           <div
             key={line.id}

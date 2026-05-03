@@ -99,42 +99,67 @@ def _call_zerog_compute(
 ) -> dict:
     """
     Call 0G Compute Network for sealed inference.
-    Falls back to mock if API unavailable.
+    Uses OpenAI-compatible endpoint from 0G docs.
+    Falls back to mock if unavailable.
     """
     try:
+        import requests
+
+        # 0G Compute endpoint (OpenAI compatible)
+        endpoint = os.getenv(
+            "ZEROG_COMPUTE_URL",
+            "https://compute-testnet.0g.ai"
+        )
+        model = os.getenv("ZEROG_COMPUTE_MODEL", "qwen3-6plus")
+
         headers = {
             "Content-Type": "application/json",
-        }
-        payload = {
-            "model": MODEL,
-            "messages": [
-                {"role": "system", "content": system_prompt},
-                {"role": "user",   "content": user_message}
-            ],
-            "temperature": 0.3,
-            "max_tokens": 500
+            "Authorization": f"Bearer {os.getenv('PRIVATE_KEY', '')}",
         }
 
+        payload = {
+            "model": model,
+            "messages": [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_message}
+            ],
+            "temperature": 0.3,
+            "max_tokens": 500,
+            "stream": False
+        }
+
+        print(f"[{agent_name}] 🔗 Calling 0G Compute: {endpoint}/v1/chat/completions")
+
         response = requests.post(
-            f"{COMPUTE_URL}/v1/chat/completions",
+            f"{endpoint}/v1/chat/completions",
             headers=headers,
             json=payload,
             timeout=30
         )
 
+        print(f"[{agent_name}] 📡 0G Response: {response.status_code}")
+
         if response.status_code == 200:
-            content = response.json()
-            text = content["choices"][0]["message"]["content"]
-            # Parse JSON response
+            data = response.json()
+            text = data["choices"][0]["message"]["content"]
+            # Clean JSON response
+            text = text.strip()
+            if "```json" in text:
+                text = text.split("```json")[1].split("```")[0].strip()
+            elif "```" in text:
+                text = text.split("```")[1].split("```")[0].strip()
             result = json.loads(text)
-            print(f"[{agent_name}] ✅ 0G Compute inference complete")
+            print(f"[{agent_name}] ✅ 0G Compute inference SUCCESS")
             return result
         else:
-            print(f"[{agent_name}] ⚠️ 0G Compute returned {response.status_code} — using mock")
+            print(f"[{agent_name}] ⚠️ 0G returned {response.status_code}: {response.text[:100]}")
             return None
 
+    except json.JSONDecodeError as e:
+        print(f"[{agent_name}] ⚠️ JSON parse error: {e} — using mock")
+        return None
     except Exception as e:
-        print(f"[{agent_name}] ⚠️ 0G Compute unavailable ({e}) — using mock")
+        print(f"[{agent_name}] ⚠️ 0G Compute error: {e} — using mock")
         return None
 
 

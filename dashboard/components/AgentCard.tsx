@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Agent } from '@/lib/data';
-import StatusBadge from './StatusBadge';
+import StatusBadge from '@/components/StatusBadge';
 
 interface Props {
   agent: Agent;

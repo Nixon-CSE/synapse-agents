@@ -63,3 +63,52 @@ testnet sandbox for hackathon builders.
 |---|---|---|
 | SynapseNFT | 0x435aecBd6Bf3bD6a6F270Ec8C32847b83edf5087 | [View](https://chainscan-galileo.0g.ai/address/0x435aecBd6Bf3bD6a6F270Ec8C32847b83edf5087) |
 | AgentRegistry | 0x48A75514c9dE15234De96B4e08101607a67eC7E8 | [View](https://chainscan-galileo.0g.ai/address/0x48A75514c9dE15234De96B4e08101607a67eC7E8) |
+
+---
+ 
+## Demo
+ 
+**Live Dashboard:** `localhost:3001` (run `cd dashboard && npm run dev`)
+ 
+**KeeperHub Workflow:** [app.keeperhub.com/workflows/h1dw848zbb6mhhvxrhf4i](https://app.keeperhub.com/workflows/h1dw848zbb6mhhvxrhf4i)
+ 
+**0G Explorer:** [chainscan-galileo.0g.ai](https://chainscan-galileo.0g.ai/address/0xFB441BB76B0595ec2B2e48cE1bC7C5a3983ee4E4)
+ 
+---
+
+---
+ 
+## Architecture
+ 
+```
+┌─────────────────────────────────────────────────┐
+│                  SYNAPSE_OS                      │
+│                                                  │
+│   ARIA ──────────── APEX ──────────── AIDEN      │
+│ (Reasoning)    (Execution)        (Audit)        │
+│     │               │                │           │
+│     └───── AXL P2P Mesh ────────────┘           │
+│                     │                            │
+│              KeeperHub MCP                       │
+│           (Guaranteed Execution)                 │
+│                     │                            │
+│           0G Galileo Testnet                     │
+│        (SynapseNFT + AgentRegistry)              │
+│                     │                            │
+│           0G Decentralized Storage               │
+│           (Agent Memory / KV Store)              │
+└─────────────────────────────────────────────────┘
+```
+
+---
+ 
+## Contract Addresses (0G Galileo Testnet)
+ 
+| Contract | Address |
+|---|---|
+| SynapseNFT | `0xFB441BB76B0595ec2B2e48cE1bC7C5a3983ee4E4` |
+| AgentRegistry | `0xCDaA7cAbF5486dE8cD577B3eFEb78e5477D840e2` |
+ 
+- [SynapseNFT on 0G Explorer](https://chainscan-galileo.0g.ai/address/0xFB441BB76B0595ec2B2e48cE1bC7C5a3983ee4E4)
+- [AgentRegistry on 0G Explorer](https://chainscan-galileo.0g.ai/address/0xCDaA7cAbF5486dE8cD577B3eFEb78e5477D840e2)
+---
