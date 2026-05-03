@@ -4,27 +4,8 @@ Serves real agent data to frontend
 """
 from http.server import HTTPServer, BaseHTTPRequestHandler
 import json
-import sys
 import os
 import time
-
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-from storage.memory import ZeroGMemory, _local_kv_store, _local_log_store
-
-# Boot all agents into memory
-aria_mem  = ZeroGMemory("ARIA")
-apex_mem  = ZeroGMemory("APEX")
-aiden_mem = ZeroGMemory("AIDEN")
-
-# Set initial state
-aria_mem.kv_set("status", "THINKING")
-apex_mem.kv_set("status", "EXECUTING")
-aiden_mem.kv_set("status", "APPROVED")
-aria_mem.kv_set("cycles", 47)
-apex_mem.kv_set("tx_count", 23)
-aiden_mem.kv_set("audits", 31)
-aria_mem.swarm_set("current_goal", "Analyze ETH/USDC opportunity")
-aria_mem.swarm_set("mesh_peers", ["aria", "apex", "aiden"])
 
 class SynapseHandler(BaseHTTPRequestHandler):
 
@@ -37,124 +18,60 @@ class SynapseHandler(BaseHTTPRequestHandler):
         if self.path == '/api/agents':
             data = {
                 "agents": [
-                    {
-                        "id": 1,
-                        "name": "ARIA",
-                        "role": "ANALYST",
-                        "ens": "aria.syn.eth",
-                        "status": aria_mem.kv_get("status") or "IDLE",
-                        "cycles": aria_mem.kv_get("cycles") or 47,
-                        "confidence": 78,
-                        "token_id": 1,
-                        "color": "#00FF88"
-                    },
-                    {
-                        "id": 2,
-                        "name": "APEX",
-                        "role": "EXECUTOR",
-                        "ens": "apex.syn.eth",
-                        "status": apex_mem.kv_get("status") or "IDLE",
-                        "tx_count": apex_mem.kv_get("tx_count") or 23,
-                        "success_rate": 96,
-                        "token_id": 2,
-                        "color": "#FF4500"
-                    },
-                    {
-                        "id": 3,
-                        "name": "AIDEN",
-                        "role": "AUDITOR",
-                        "ens": "aiden.syn.eth",
-                        "status": aiden_mem.kv_get("status") or "IDLE",
-                        "audits": aiden_mem.kv_get("audits") or 31,
-                        "risks": 2,
-                        "token_id": 3,
-                        "color": "#0066FF"
-                    }
+                    {"id": 1, "name": "ARIA", "role": "ANALYST",
+                     "ens": "aria.syn.eth", "status": "THINKING",
+                     "cycles": 47, "confidence": 78, "token_id": 1, "color": "#00FF88"},
+                    {"id": 2, "name": "APEX", "role": "EXECUTOR",
+                     "ens": "apex.syn.eth", "status": "EXECUTING",
+                     "tx_count": 23, "success_rate": 96, "token_id": 2, "color": "#FF4500"},
+                    {"id": 3, "name": "AIDEN", "role": "AUDITOR",
+                     "ens": "aiden.syn.eth", "status": "APPROVED",
+                     "audits": 31, "risks": 2, "token_id": 3, "color": "#0066FF"}
                 ]
             }
-
         elif self.path == '/api/swarm':
             data = {
                 "active": True,
-                "goal": aria_mem.swarm_get("current_goal"),
-                "cycle": aria_mem.kv_get("cycles") or 47,
-                "peers": aria_mem.swarm_get("mesh_peers"),
+                "goal": "Analyze ETH/USDC opportunity",
+                "cycle": 47,
+                "peers": ["aria", "apex", "aiden"],
                 "network": "0G Galileo Testnet",
                 "contracts": {
-                    "SynapseNFT": "0x435aecBd6Bf3bD6a6F270Ec8C32847b83edf5087",
-                    "AgentRegistry": "0x48A75514c9dE15234De96B4e08101607a67eC7E8"
+                    "SynapseNFT": "0xFB441BB76B0595ec2B2e48cE1bC7C5a3983ee4E4",
+                    "AgentRegistry": "0xCDaA7cAbF5486dE8cD577B3eFEb78e5477D840e2"
                 }
             }
-
-        elif self.path == '/api/memory':
-            data = {
-                "kv_entries": [
-                    {"key": k.replace("synapse:", ""), 
-                     "value": str(v.get("value", ""))[:40],
-                     "type": "STR",
-                     "ttl": "∞"}
-                    for k, v in list(_local_kv_store.items())[:10]
-                ],
-                "total_keys": len(_local_kv_store),
-                "log_entries": len(_local_log_store),
-                "used_space": f"{len(str(_local_kv_store)) / 1024:.1f} KB"
-            }
-
-        elif self.path == '/api/logs':
-            data = {
-                "messages": [
-                    {
-                        "time": time.strftime("%H:%M:%S", 
-                               time.localtime(l.get("timestamp", time.time()))),
-                        "from": l.get("agent", "SYS"),
-                        "event": l.get("event_type", "LOG"),
-                        "data": str(l.get("data", ""))[:60]
-                    }
-                    for l in _local_log_store[-20:]
-                ]
-            }
-
         elif self.path == '/api/keeperhub':
             data = {
-                "workflow_id": "6axj0d0i9tgvcf20stxxd",
+                "workflow_id": "h1dw848zbb6mhhvxrhf4i",
+                "status": "LIVE",
+                "contract": "0xFB441BB76B0595ec2B2e48cE1bC7C5a3983ee4E4",
+                "network": "0G Galileo (16602)",
                 "transactions": [
-                    {"time": "17:02:00", "agent": "APEX",
-                     "action": "AgentRegistry.cycle()",
-                     "hash": "0xd4e3...f7a2", "attempts": 2,
-                     "gas": 89450, "status": "SUCCESS"},
-                    {"time": "17:01:30", "agent": "APEX",
-                     "action": "SynapseNFT.mint()",
-                     "hash": "0xc1b2...e5d1", "attempts": 1,
-                     "gas": 142000, "status": "SUCCESS"},
-                    {"time": "17:01:00", "agent": "APEX",
-                     "action": "AgentRegistry.register()",
-                     "hash": "0xf9a8...3c4b", "attempts": 1,
-                     "gas": 67800, "status": "SUCCESS"},
-                    {"time": "16:59:50", "agent": "APEX",
-                     "action": "AgentRegistry.cycle()",
-                     "hash": "0xe2c4...8a1d", "attempts": 5,
-                     "gas": 0, "status": "FAILED"}
+                    {"time": "11:08:00", "agent": "APEX",
+                     "action": "SynapseNFT.mint()", "attempts": 5,
+                     "status": "TIMEOUT", "note": "0G testnet latency"},
+                    {"time": "10:54:00", "agent": "APEX",
+                     "action": "SynapseNFT.mint()", "attempts": 3,
+                     "status": "INSUFFICIENT_FUNDS", "note": "Funded after"},
+                    {"time": "10:30:00", "agent": "APEX",
+                     "action": "SynapseNFT.mint()", "attempts": 1,
+                     "status": "ENS_ERROR", "note": "Fixed @ field"}
                 ]
             }
+        elif self.path == '/health':
+            data = {"status": "ok", "service": "SYNAPSE API", "version": "1.0"}
         else:
-            data = {"status": "SYNAPSE API running", "version": "1.0"}
+            data = {"status": "SYNAPSE API running", "version": "1.0",
+                    "endpoints": ["/api/agents", "/api/swarm", "/api/keeperhub", "/health"]}
 
         self.wfile.write(json.dumps(data).encode())
 
     def log_message(self, format, *args):
-        pass  # Suppress logs
+        pass
 
 if __name__ == "__main__":
-    print("🚀 SYNAPSE API Server starting...")
-    print("━"*40)
-    print("📡 Running at: http://localhost:8000")
-    print("━"*40)
-    print("Endpoints:")
-    print("  /api/agents    → Agent status")
-    print("  /api/swarm     → Swarm state")
-    print("  /api/memory    → 0G Storage KV")
-    print("  /api/logs      → AXL messages")
-    print("  /api/keeperhub → TX history")
-    print("━"*40)
-    server = HTTPServer(('localhost', 8000), SynapseHandler)
+    port = int(os.environ.get("PORT", 8000))
+    print(f"🚀 SYNAPSE API starting on 0.0.0.0:{port}")
+    server = HTTPServer(('0.0.0.0', port), SynapseHandler)
     server.serve_forever()
