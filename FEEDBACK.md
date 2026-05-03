@@ -51,5 +51,3 @@ layer is exactly what APEX needed. Main gaps are
 Python support, testnet sandbox, and complete 
 0G Galileo integration.
 
-Rating: 7/10 — Great concept, needs polish for 
-AI agent hackathon builders.
